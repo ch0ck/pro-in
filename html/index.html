@@ -1,0 +1,174 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<title> (。・`ω´・)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Modern Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+ <!-- Bootstrap Core CSS -->
+<link href="html/css/bootstrap.min.css" rel='stylesheet' type='text/css' />
+<!-- Custom CSS -->
+<link href="html/css/style.css" rel='stylesheet' type='text/css' />
+<!-- Graph CSS -->
+<link href="html/css/lines.css" rel='stylesheet' type='text/css' />
+<link href="html/css/font-awesome.css" rel="stylesheet"> 
+<!-- jQuery -->
+<script src="html/js/jquery.min.js"></script>
+<!----webfonts--->
+<link href='http://fonts.useso.com/css?family=Roboto:400,100,300,500,700,900' rel='stylesheet' type='text/css'>
+<!---//webfonts--->  
+<!-- Nav CSS -->
+<link href="html/css/custom.css" rel="stylesheet">
+<!-- Metis Menu Plugin JavaScript -->
+<script src="html/js/metisMenu.min.js"></script>
+<script src="html/js/custom.js"></script>
+<!-- Graph JavaScript -->
+<script src="html/js/d3.v3.js"></script>
+<script src="html/js/rickshaw.js"></script>
+</head>
+<body>
+<div id="wrapper">
+     <!-- Navigation -->
+        <nav class="top1 navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar">QAQ</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="html/index.html"> (。・`ω´・)</a>
+            </div>
+            <!-- /.navbar-header -->
+            <ul class="nav navbar-nav navbar-right">
+   			    <li class="dropdown">
+	        		<a href="#" class="dropdown-toggle avatar" data-toggle="dropdown"><img src="html/images/1.png"></a>
+	        		
+	      		</li>
+			</ul>
+			<form class="navbar-form navbar-right">
+              <input type="text" class="form-control" value="Search..." onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = 'Search...';}">
+            </form>
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+                        <li>
+                            <a href="html/index.html"><i class="fa fa-dashboard fa-fw nav_icon"></i>扫描状况</a>
+                        </li>
+                        <li>
+                            <a href="html/result.html"><i class="fa fa-dashboard fa-fw nav_icon"></i>扫描结果集</a>
+                        </li>                       
+                    </ul>
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
+            <!-- /.navbar-static-side -->
+        </nav>
+        <div id="page-wrapper">
+        <div class="graphs">
+        <!-- 四个小块-->
+        <div class="col_3">
+        	<div class="col-md-3 widget widget1">
+        		<div class="r3_counter_box">
+                    <i class="pull-left fa fa-thumbs-up icon-rounded"></i>
+                    <div class="stats">
+                      <h5><strong>{{scaning}}</strong></h5>
+                      <span>Scaning Urls</span>
+                    </div>
+                </div>
+        	</div>
+        	<div class="col-md-3 widget widget1">
+        		<div class="r3_counter_box">
+                    <i class="pull-left fa fa-users user1 icon-rounded"></i>
+                    <div class="stats">
+                      <h5><strong>{{waiting}}</strong></h5>
+                      <span>Waiting Urls</span>
+                    </div>
+                </div>
+        	</div>
+        	<div class="col-md-3 widget widget1">
+        		<div class="r3_counter_box">
+                    <i class="pull-left fa fa-comment user2 icon-rounded"></i>
+                    <div class="stats">
+                      <h5><strong>1012</strong></h5>
+                      <span>Vulun</span>
+                    </div>
+                </div>
+        	</div>
+        	<div class="col-md-3 widget">
+        		<div class="r3_counter_box">
+                    <i class="pull-left fa fa-dollar dollar1 icon-rounded"></i>
+                    <div class="stats">
+                      <h5><strong>$450</strong></h5>
+                      <span>Profit Today</span>
+                    </div>
+                </div>
+        	 </div>
+        	<div class="clearfix"> </div>
+      </div>
+      <!-- 四个小块结束-->	      
+	  <div class="span_11">
+		
+    <div class="content_bottom">
+     <div class="col-md-8 span_3">
+		  <div class="bs-example1" data-example-id="contextual-table">
+		    <table class="table">
+		      <thead>
+		        <tr>
+		          <th>#</th>
+		          <th>URL</th>
+		          <th>数据库</th>
+		          <!--<th>Column heading</th>-->
+		        </tr>
+		      </thead>
+		      <tbody>
+			%for i in result:
+		        <tr class="{{color}}">
+		          <th scope="row">{{i[0]}}</th>
+		          <td>{{i[1]}}</td>
+		          <td>{{eval(i[3].encode('utf-8'))['value'][0]['dbms']}}</td>
+		        </tr>		        
+			%end
+		    <!--<tr class="success">
+		          <th scope="row">3</th>
+		          <td>Column content</td>
+		          <td>Column content</td>
+		        </tr>
+		        <tr class="info">
+		          <th scope="row">5</th>
+		          <td>Column content</td>
+		          <td>Column content</td>
+		        </tr>
+		        <tr class="warning">
+		          <th scope="row">7</th>
+		          <td>Column content</td>
+		          <td>Column content</td>
+		        </tr>
+		       <tr class="danger">
+		          <th scope="row">9</th>
+		          <td>Column content</td>
+		          <td>Column content</td>
+		       </tr>-->	          
+		        
+		      </tbody>
+		    </table>
+		   </div>
+	   </div>
+	   
+	<div class="clearfix"> </div>
+	</div>
+	<div class="copy">
+           <p>Copyright &copy; 2015 <a href="http://www.tm4n.com" target="_blank">太平洋网络</a></p>
+	</div>
+		</div>
+       </div>
+      <!-- /#page-wrapper -->
+   </div>
+    <!-- /#wrapper -->
+    <!-- Bootstrap Core JavaScript -->
+    <script src="html/js/bootstrap.min.js"></script>
+</body>
+</html>
