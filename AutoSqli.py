@@ -48,6 +48,7 @@ class AutoSqli(object):
 		if len(str(self.engineid))>0 and t['success']:
 			print 'Start scan'
 			print self.payload
+			print t
 			return True
 		return False
 
@@ -104,7 +105,7 @@ class AutoSqli(object):
 			else:
 				break
 
-			if time.time() -self.start_time > 300:
+			if time.time() -self.start_time > 3000:
 				error= True
 				self.scan_stop()
 				self.scan_kill()

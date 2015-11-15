@@ -1,4 +1,3 @@
-
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -40,7 +39,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="html/index.html"> (。・`ω´・)</a>
+                <a class="navbar-brand" href="index"> (。・`ω´・)</a>
             </div>
             <!-- /.navbar-header -->
             <ul class="nav navbar-nav navbar-right">
@@ -56,10 +55,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
                         <li>
-                            <a href="html/index.html"><i class="fa fa-dashboard fa-fw nav_icon"></i>扫描状况</a>
+                            <a href="index"><i class="fa fa-dashboard fa-fw nav_icon"></i>扫描状况</a>
                         </li>
                         <li>
-                            <a href="html/result.html"><i class="fa fa-dashboard fa-fw nav_icon"></i>扫描结果集</a>
+                            <a href="result"><i class="fa fa-dashboard fa-fw nav_icon"></i>扫描结果集</a>
                         </li>                       
                     </ul>
                 </div>
@@ -93,18 +92,20 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         		<div class="r3_counter_box">
                     <i class="pull-left fa fa-comment user2 icon-rounded"></i>
                     <div class="stats">
-                      <h5><strong>1012</strong></h5>
-                      <span>Vulun</span>
+                      <h5><strong>{{count}}</strong></h5>
+                      <span>Vulnerable</span>
                     </div>
                 </div>
         	</div>
         	<div class="col-md-3 widget">
         		<div class="r3_counter_box">
                     <i class="pull-left fa fa-dollar dollar1 icon-rounded"></i>
-                    <div class="stats">
-                      <h5><strong>$450</strong></h5>
-                      <span>Profit Today</span>
-                    </div>
+					<div class="stats">
+							<form method="post" action="/crawl">
+									<input type="text" class="form-controll" name="target" placeholder="http://your.target.com"><br/> 
+							<input type="submit" class="btn btn-primary">
+							</form>
+					</div>
                 </div>
         	 </div>
         	<div class="clearfix"> </div>
@@ -121,37 +122,31 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		          <th>#</th>
 		          <th>URL</th>
 		          <th>数据库</th>
-		          <!--<th>Column heading</th>-->
+		          <th>do something</th>
 		        </tr>
 		      </thead>
 		      <tbody>
 			%for i in result:
 		        <tr class="{{color}}">
 		          <th scope="row">{{i[0]}}</th>
-		          <td>{{i[1]}}</td>
+		          <td >{{i[1]}}</td>
 		          <td>{{eval(i[3].encode('utf-8'))['value'][0]['dbms']}}</td>
-		        </tr>		        
+		        <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#{{i[0]}}">look</button></td>
+			</tr>		        
+			<div class="modal fade" id="{{i[0]}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display:none">
+			<div class="modal-dialog">
+			<div class="modal-content">
+			<div class=modal-header>
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+			<h2 class="modal-title">SQLi QAQ</h2>
+			</div>
+			<div class="modal-body">
+			%for j in eval(i[3].encode('utf-8'))['value'][0]['data']:
+			#{{j}}:{{eval(i[3].encode('utf8'))['value'][0]['data'][j]}}</br>
 			%end
-		    <!--<tr class="success">
-		          <th scope="row">3</th>
-		          <td>Column content</td>
-		          <td>Column content</td>
-		        </tr>
-		        <tr class="info">
-		          <th scope="row">5</th>
-		          <td>Column content</td>
-		          <td>Column content</td>
-		        </tr>
-		        <tr class="warning">
-		          <th scope="row">7</th>
-		          <td>Column content</td>
-		          <td>Column content</td>
-		        </tr>
-		       <tr class="danger">
-		          <th scope="row">9</th>
-		          <td>Column content</td>
-		          <td>Column content</td>
-		       </tr>-->	          
+			 </div>
+			</div></div></div>
+			%end
 		        
 		      </tbody>
 		    </table>
