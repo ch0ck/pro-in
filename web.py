@@ -4,6 +4,8 @@ import os, subprocess,requests,time,json,sqlite3,random
 from multiprocessing import Process, Queue
 from bottle import route, run, template, request,static_file,view
 from AutoSqli import AutoSqli
+from getUrl import getUrl
+from threading import Thread
 queue_waiting = Queue()
 queue_scaning = Queue(10)
 
@@ -27,7 +29,8 @@ def compare_scaner():
     urls = request.body.readlines()
     postdata = eval(urls[0])
     queue_waiting.put(postdata)
-    Process(target=queue_get,args=(queue_waiting,queue_scaning)).start()
+    Thread(target=queue_get,args=(queue_waiting,queue_scaning)).start()
+	#Process(target=queue_get,args=(queue_waiting,queue_scaning)).start()
 
 @route('/',method='GET')
 @route('/index', method='GET')
@@ -40,10 +43,23 @@ def index():
 	conn.close()
 	return template('html/index.html',count=len(result),result=result,color='success',scaning=queue_scaning.qsize(),waiting=queue_waiting.qsize())
 
+@post('delete')
+def delete():
+	id = request.forms.get('id')
+	try:
+		conn = sqlite3.connect('sqli.db')
+		cs = conn.cursor()
+		cs.execute('delete from injection where id=%s'%int(id))
+		conn.commit()
+		conn.close()
+	except:
+		return 'it is not a num'
+
 @route('/crawl',method='POST')
 def crawl():
 	target = request.forms.get('target')
-	print target
+	collection = getUrl(target)
+	collection.run()
 	return template('html/crawl.html',target=target)
 
 @route('/result',method='GET')

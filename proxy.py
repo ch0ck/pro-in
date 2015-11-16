@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 # encoding:utf-8
 import os,re,collections
-import requests,json,urlparse
+import requests,json,urlparse,urllib
 from libmproxy import controller, proxy
 from libmproxy.proxy.server import ProxyServer
-
+import chardet
 
 class StickyMaster(controller.Master):
     def __init__(self, server):
@@ -54,9 +54,11 @@ class StickyMaster(controller.Master):
 
 		if bcomeUrl not in self.pickurl:#判断检测过的列表里有无这个链接
 			self.pickurl.append(bcomeUrl)#加入检测列表名单
-			if lastUrl:
-				print '%s %s'%(lastUrl,flow.request.content)
-				requests.post("http://192.168.76.224:8082/compare",data=json.dumps({'url':lastUrl,'data':flow.request.content,'header':headers,'method':flow.request.method}),headers={'Content-Type':'application/json'})
+			if lastUrl:					#下面加上post body中非ascii编码的剔除
+					if flow.request.method == 'GET':
+							requests.post("http://192.168.76.224:8082/compare",data=json.dumps({'url':lastUrl,'data':flow.request.content,'header':headers,'method':flow.request.method}),headers={'Content-Type':'application/json'})
+					elif (flow.request.method == 'POST') and (chardet.detect(flow.request.content)['encoding'] == 'ascii'):
+							requests.post("http://192.168.76.224:8082/compare",data=json.dumps({'url':lastUrl,'data':flow.request.content,'header':headers,'method':flow.request.method}),headers={'Content-Type':'application/json'})
 
     def handle_response(self, flow):
 		hid = (flow.request.host, flow.request.port)
