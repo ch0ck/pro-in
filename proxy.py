@@ -56,9 +56,9 @@ class StickyMaster(controller.Master):
 			self.pickurl.append(bcomeUrl)#加入检测列表名单
 			if lastUrl:					#下面加上post body中非ascii编码的剔除.
 					if flow.request.method == 'GET':
-							requests.post("http://192.168.76.224:8082/compare",data=json.dumps({'url':lastUrl,'data':flow.request.content,'header':headers,'method':flow.request.method}),headers={'Content-Type':'application/json'})
+							requests.post("http://127.0.0.1:8082/compare",data=json.dumps({'url':lastUrl,'data':flow.request.content,'header':headers,'method':flow.request.method}),headers={'Content-Type':'application/json'})
 					elif (flow.request.method == 'POST') and (chardet.detect(flow.request.content)['encoding'] == 'ascii'):
-							requests.post("http://192.168.76.224:8082/compare",data=json.dumps({'url':lastUrl,'data':flow.request.content,'header':headers,'method':flow.request.method}),headers={'Content-Type':'application/json'})
+							requests.post("http://127.0.0.1:8082/compare",data=json.dumps({'url':lastUrl,'data':flow.request.content,'header':headers,'method':flow.request.method}),headers={'Content-Type':'application/json'})
 
     def handle_response(self, flow):
 		hid = (flow.request.host, flow.request.port)
