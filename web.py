@@ -2,7 +2,7 @@
 
 import os, subprocess,requests,time,json,sqlite3,random
 from multiprocessing import Process, Queue
-from bottle import route, run, template, request,static_file,view
+from bottle import route, run, template, request,static_file,view,post
 from AutoSqli import AutoSqli
 from getUrl import getUrl
 from threading import Thread
