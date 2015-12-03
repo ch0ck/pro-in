@@ -80,4 +80,4 @@ def queue_get(queue_waiting, queue_scaning):
         
 if __name__ == '__main__':
 
-    run(host='192.168.76.224', port=8082)
+    run(host='0.0.0.0', port=8082)
